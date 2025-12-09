@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LEX · Olympiad & Competition Programs</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Georgia:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="images/favicon.png" rel="icon" />
+  <link href="images/apple-touch-icon.png" rel="apple-touch-icon" />
+
+  <style>
+    :root {
+      --lex-red: #d9463e;
+      --lex-soft: #ff7d5c;
+      --lex-blue: #0a1a33;
+      --page-bg: #e4e8f0;
+      --border-soft: #ccd3df;
+      --text-main: #1e1e1e;
+      --text-muted: #4b5563;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Open Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--page-bg);
+      color: var(--text-main);
+    }
+
+    a {
+      color: var(--lex-blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* PAGE FRAME – made wider */
+    .page-frame {
+      max-width: 1320px;        /* was 1120px */
+      margin: 0px auto;        /* slightly tighter margin */
+      background: #ffffff;
+      border: 1px solid #b9c4d2;
+      box-shadow: 0 0 0 1px #f8fafc;
+    }
+
+    /* HEADER BAR */
+    #header-bar {
+      background: linear-gradient(to bottom, #15233a, #0a1526);
+      color: #ffffff;
+      padding: 10px 26px;
+      border-bottom: 3px solid var(--lex-red);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-brand img {
+      height: 36px;
+      width: auto;
+    }
+
+    .header-brand-main {
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .header-brand-sub {
+      font-size: 0.78rem;
+      opacity: 0.85;
+    }
+
+    .old-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.9rem;
+    }
+
+    .old-nav a {
+      color: #f4f7fb;
+      padding: 4px 10px;
+      border-radius: 3px;
+      border: 1px solid transparent;
+    }
+
+    .old-nav a:hover,
+    .old-nav a.active {
+      border-color: rgba(255, 255, 255, 0.7);
+      background: rgba(0, 0, 0, 0.18);
+      text-decoration: none;
+    }
+
+    /* HERO */
+    #hero {
+      padding: 26px 28px 22px;
+      border-bottom: 1px solid var(--border-soft);
+      background: linear-gradient(to right, #f9fbff, #f2f5fb);
+    }
+
+    .hero-inner-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .hero-main {
+      flex: 1 1 260px;
+      min-width: 260px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-title {
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 2.3rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--lex-blue);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: #374151;
+      max-width: 26rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-subtitle strong {
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn-main {
+      background: linear-gradient(to bottom, var(--lex-red), #b63a33);
+      color: #ffffff;
+      padding: 7px 18px;
+      border-radius: 999px;
+      border: 1px solid #942822;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-main:hover {
+      background: linear-gradient(to bottom, #e0564e, #b63a33);
+      text-decoration: none;
+    }
+
+    .btn-outline {
+      background: #f7fafc;
+      color: var(--lex-red);
+      padding: 7px 18px;
+      border-radius: 999px;
+      border: 1px solid #e09a90;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .btn-outline:hover {
+      background: #f1f5f9;
+      text-decoration: none;
+    }
+
+    .hero-side {
+      flex: 0 0 260px;
+      max-width: 320px;
+      text-align: right;
+    }
+
+    .hero-side img {
+      max-width: 100%;
+      border-radius: 4px;
+      border: 1px solid #ccd4e0;
+      background: #fdfefe;
+    }
+
+    /* SECTION GENERIC */
+    .section-block {
+      padding: 22px 28px 18px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .section-heading {
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 1.6rem;
+      color: var(--lex-blue);
+      margin-bottom: 4px;
+    }
+
+    .section-divider {
+      width: 70px;
+      height: 3px;
+      background: var(--lex-red);
+      border-radius: 4px;
+      margin-bottom: 14px;
+    }
+
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      max-width: 640px;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .about-text {
+      flex: 1 1 260px;
+      font-size: 0.96rem;
+      line-height: 1.7;
+      color: #343e4c;
+    }
+
+    .about-text p {
+      margin-bottom: 0.9rem;
+      text-align: justify;
+    }
+
+    .about-image {
+      flex: 0 0 260px;
+      max-width: 340px;
+      text-align: right;
+    }
+
+    .about-image img {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 1px solid #cbd3e1;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+    }
+
+    /* CONTESTS */
+    .section-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .contest-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 16px;
+      border: 1px solid #d3d9e3;
+      background: #fdfefe;
+      margin-bottom: 14px;
+    }
+
+    .contest-row:nth-child(even) {
+      background: #f7f9fc;
+    }
+
+    .contest-img-col {
+      flex: 0 0 190px;
+      max-width: 240px;
+    }
+
+    .contest-img-wrap {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      min-height: 160px;
+      background: #000;
+    }
+
+    .contest-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.02);
+    }
+
+    .contest-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top right, rgba(0, 0, 0, 0.35), transparent 60%);
+      opacity: 0.3;
+    }
+
+    .contest-body {
+      flex: 1 1 260px;
+      font-size: 0.94rem;
+      color: #374151;
+    }
+
+    .contest-pill {
+      display: inline-block;
+      padding: 2px 12px;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      background: rgba(217, 70, 62, 0.1);
+      color: #b91c1c;
+      margin-bottom: 6px;
+    }
+
+    .contest-name {
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 1.25rem;
+      color: #111827;
+      margin-bottom: 4px;
+    }
+
+    .contest-tagline {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+
+    .contest-desc {
+      font-size: 0.95rem;
+      color: #444d5b;
+      line-height: 1.7;
+      margin-bottom: 8px;
+      text-align: justify;
+    }
+
+    .contest-points {
+      list-style: none;
+      padding-left: 0;
+      margin: 0 0 8px;
+    }
+
+    .contest-points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 0.9rem;
+      color: #4b5563;
+      margin-bottom: 4px;
+    }
+
+    .contest-points li::before {
+      content: "▹";
+      font-size: 0.8rem;
+      color: var(--lex-red);
+      margin-top: 2px;
+    }
+
+    .update-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f7f9fc;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid #d3d9e3;
+      font-size: 0.88rem;
+      margin-bottom: 10px;
+      color: #334155;
+    }
+
+    .update-label {
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding-right: 10px;
+      border-right: 2px solid var(--lex-red);
+      color: var(--lex-red);
+      white-space: nowrap;
+    }
+
+    .update-year {
+      color: #1e3a8a;
+      border-right-color: #1e3a8a;
+    }
+
+    .btn-small-main {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--lex-red);
+      color: #ffffff;
+      border: 1px solid #942822;
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .btn-small-main:hover {
+      background: #e0564e;
+      text-decoration: none;
+    }
+
+    /* CONTACT */
+    #contact-section {
+      padding: 22px 28px 26px;
+      border-bottom: 1px solid var(--border-soft);
+      background: #ffffff;
+      text-align: center;
+    }
+
+    .contact-title {
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 1.6rem;
+      color: var(--lex-blue);
+      margin-bottom: 6px;
+    }
+
+    .contact-divider {
+      width: 70px;
+      height: 3px;
+      background: var(--lex-red);
+      border-radius: 4px;
+      margin: 0 auto 14px;
+    }
+
+    .contact-text {
+      max-width: 520px;
+      margin: 0 auto 12px;
+      font-size: 0.96rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .contact-email {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 8px 22px;
+      border-radius: 999px;
+      background: var(--lex-red);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 8px 18px rgba(217, 70, 62, 0.23);
+    }
+
+    .contact-email:hover {
+      background: #be3b36;
+      text-decoration: none;
+    }
+
+    /* FOOTER */
+    #footer {
+      padding: 10px 28px;
+      background: #f5f6fa;
+      border-top: 1px solid #cdd4e0;
+      font-size: 0.86rem;
+      color: #6b7280;
+      text-align: center;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .page-frame {
+        margin: 8px;
+      }
+
+      #header-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .old-nav {
+        justify-content: flex-start;
+      }
+
+      .hero-inner-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-side,
+      .about-image {
+        text-align: left;
+      }
+
+      .contest-row {
+        padding: 12px;
+      }
+
+      .contest-img-col {
+        max-width: none;
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page-frame">
+    <!-- HEADER -->
+    <header id="header-bar">
+      <div class="header-brand">
+        <img src="images/logo.png" alt="LEX logo" />
+        <div>
+          <div class="header-brand-main">LEX</div>
+          <div class="header-brand-sub">Inspiring Young Innovators in South Korea</div>
+        </div>
+      </div>
+
+      <nav class="old-nav">
+        <a href="#hero" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#contests">Programs</a>
+        <a href="#contact-section">Contact</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-inner-row">
+        <div class="hero-main">
+          <div class="hero-eyebrow">Inspiring Young Innovators</div>
+          <h1 class="hero-title">LEX</h1>
+          <p class="hero-subtitle">
+            LEX partners with institutions to design
+            <strong>various contests</strong> and
+            <strong>academic activity programs</strong> in South Korea.
+          </p>
+          <div class="hero-actions">
+            <a href="#about" class="btn-main">Learn More</a>
+            <a href="#contact-section" class="btn-outline">Contact Us</a>
+          </div>
+        </div>
+        <div class="hero-side">
+          <img src="images/hero3.jpg" alt="Students participating in LEX academic programs" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section-block">
+      <h2 class="section-heading">About LEX</h2>
+      <div class="section-divider"></div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            LEX is an academic training and mentorship organization recognized for collaborating with leading
+            international schools, academies, and educational institutions across Asia and beyond. We specialize in
+            <strong>various contests preparation</strong>, national and international competitions in
+            <strong>South Korea</strong>, and advanced enrichment programs for students who aim to excel in computer
+            science, engineering, and mathematics.
+          </p>
+          <p>
+            Our organization proudly serves as the regional partner for several
+            <strong>international-level competitions</strong> in South Korea. Our mission is to operate these contests
+            with the highest level of integrity while expanding access and awareness for students across the country.
+          </p>
+          <p>
+            We currently run the <strong>International Logic Olympiad, Technovation Girls Challenge,
+            VEX Competition [Korea Open], and the American Computer Science League (ACSL)</strong> in South Korea, and we
+            are actively exploring additional competitions for the 2026 season.
+          </p>
+        </div>
+        <div class="about-image">
+          <img src="images/about3.jpg" alt="LEX working with students and educators" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTESTS -->
+    <section id="contests" class="section-block">
+      <div class="section-eyebrow">Competitions</div>
+      <h2 class="section-heading">Olympiad &amp; Competition Programs</h2>
+      <div class="section-divider"></div>
+
+      <!-- ILO -->
+      <div class="contest-row" id="ilo">
+        <div class="contest-img-col">
+          <div class="contest-img-wrap">
+            <img src="images/logos/ilo2024.webp" alt="International Logic Olympiad" />
+            <div class="contest-img-overlay"></div>
+          </div>
+        </div>
+        <div class="contest-body">
+          <span class="contest-pill">Logic Olympiad</span>
+          <h3 class="contest-name">International Logic Olympiad (ILO)</h3>
+          <p class="contest-tagline">Global problem-solving in pure logic and reasoning.</p>
+          <p class="contest-desc">
+            The International Logic Olympiad gathers students worldwide to solve challenging
+            <strong>logic puzzles</strong> and reasoning problems. Hosted in partnership with
+            <strong>Stanford University</strong>, the contest expands access to advanced logic education, with LEX
+            serving as the regional host for the <strong>South Korea</strong> division.
+          </p>
+          <ul class="contest-points">
+            <li>Progressive rounds with puzzle-based and proof-style challenges.</li>
+            <li>Participation from <strong>4000+ students</strong> across 90+ countries.</li>
+            <li>Direct pathways into a Stanford-affiliated global logic community.</li>
+          </ul>
+          <div class="update-row">
+            <div class="update-label update-year">Update</div>
+            <div>
+              The ILO in South Korea has transitioned to an
+              <strong>offline, in-person testing format</strong> starting in 2026, administered and managed by LEX.
+            </div>
+          </div>
+          <a href="https://www.logicolympiad.org/" class="btn-small-main" target="_blank" rel="noopener">
+            Official Website for ILO
+          </a>
+        </div>
+      </div>
+
+      <!-- Technovation -->
+      <div class="contest-row" id="technovation">
+        <div class="contest-img-col">
+          <div class="contest-img-wrap">
+            <img src="images/logos/technovation.png" alt="Technovation South Korea" />
+            <div class="contest-img-overlay"></div>
+          </div>
+        </div>
+        <div class="contest-body">
+          <span class="contest-pill">Girls in STEM</span>
+          <h3 class="contest-name">Technovation South Korea</h3>
+          <p class="contest-tagline">
+            App development and entrepreneurship for girls solving real-world problems.
+          </p>
+          <p class="contest-desc">
+            The <strong>Technovation Challenge</strong> is a global competition that invites girls to identify a
+            real-world problem and develop an application and a business plan to solve it, building skills in
+            technology, entrepreneurship, and leadership.
+          </p>
+          <p class="contest-desc">
+            Top projects advance from regional judging to the <strong>global final round</strong>, where finalists
+            present their solutions to an international panel.
+          </p>
+          <ul class="contest-points">
+            <li>Team-based app projects focused on social impact.</li>
+            <li>Guidance in ideation, UI/UX, and pitch preparation.</li>
+            <li>Entry point into the worldwide Technovation Challenge community.</li>
+          </ul>
+          <a href="https://technovationkorea.org/" class="btn-small-main" target="_blank" rel="noopener">
+            Official Website for Technovation Korea
+          </a>
+        </div>
+      </div>
+
+      <!-- ACSL -->
+      <div class="contest-row" id="acsl">
+        <div class="contest-img-col">
+          <div class="contest-img-wrap">
+            <img src="images/logos/acsl2.png" alt="American Computer Science League" />
+            <div class="contest-img-overlay"></div>
+          </div>
+        </div>
+        <div class="contest-body">
+          <span class="contest-pill">Computer Science</span>
+          <h3 class="contest-name">American Computer Science League (ACSL)</h3>
+          <p class="contest-tagline">
+            Foundational theory and algorithms for aspiring computer scientists.
+          </p>
+          <p class="contest-desc">
+            The <strong>American Computer Science League (ACSL)</strong> builds
+            <strong>computational thinking</strong> through written and online contests. Now in its 46th year, ACSL
+            engages around <strong>8,000 students worldwide</strong> in core CS concepts and problem-solving.
+          </p>
+          <ul class="contest-points">
+            <li>Multiple divisions—Elementary, Junior, Intermediate, and Senior.</li>
+            <li>Four seasonal contests followed by the ACSL Finals.</li>
+            <li>Supports a structured, multi-year CS competition pathway.</li>
+          </ul>
+          <div class="update-row">
+            <div class="update-label update-year">Update</div>
+            <div>
+              From the 2025–2026 contest season, the ACSL in South Korea will be held at
+              <strong>two official test locations</strong> — Jeju and Seoul — administered and managed by LEX.
+            </div>
+          </div>
+          <a href="https://www.aceconsult.me/kcsl" class="btn-small-main" target="_blank" rel="noopener">
+            Official Website for KCSL
+          </a>
+        </div>
+      </div>
+
+      <!-- VEX -->
+      <div class="contest-row" id="vex">
+        <div class="contest-img-col">
+          <div class="contest-img-wrap">
+            <img src="images/logos/vex.png" alt="VEX Korea Open" />
+            <div class="contest-img-overlay"></div>
+          </div>
+        </div>
+        <div class="contest-body">
+          <span class="contest-pill">Robotics</span>
+          <h3 class="contest-name">VEX Korea Open</h3>
+          <p class="contest-tagline">
+            A global hands-on robotics challenge where students design, build, and compete.
+          </p>
+          <p class="contest-desc">
+            <strong>VEX</strong> is one of the world’s largest student robotics competitions, with over 1 million
+            students across 70+ countries, and participation in South Korea continues to grow rapidly each year.
+          </p>
+          <p class="contest-desc">
+            By launching the <strong>VEX Korea Open</strong> in partnership with <strong>CREATE</strong>, we are
+            providing students with an additional high-level competition opportunity beyond the national rounds hosted
+            by REC, opening a new pathway for teams to compete, collaborate, and challenge themselves on an
+            international stage.
+          </p>
+          <ul class="contest-points">
+            <li>One of the world’s largest student robotics competitions.</li>
+            <li>VEX Korea Open currently features IQ and V5.</li>
+            <li>Standardized rules ensure equal competition with international teams.</li>
+          </ul>
+          <div class="update-row">
+            <div class="update-label">NEW</div>
+            <div>
+              The <strong>VEX Korea Open</strong> will launch for the first time in South Korea in collaboration with
+              the <strong>CREATE organization</strong>, welcoming both local and international teams. The event is
+              confirmed for January for the VEX IQ division, with details for the VEX V5 division to be announced soon.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact-section">
+      <h2 class="contact-title">Contact LEX</h2>
+      <div class="contact-divider"></div>
+      <p class="contact-text">
+        For partnership inquiries, school hosting, or competition programs, please contact us via email.
+        We are happy to discuss how LEX can support your institution and students.
+      </p>
+      <a href="mailto:info@lexconsulting.org" class="contact-email">
+        info@lexconsulting.org
+      </a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+      &copy; <span id="year"></span> LEX · All rights reserved.
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
