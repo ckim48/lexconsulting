@@ -1,880 +1,1168 @@
 <!doctype html>
 <html lang="en" data-bs-theme="light">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LEX</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LEX</title>
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="images/favicon.png" rel="icon">
+<link href="images/apple-touch-icon.png" rel="apple-touch-icon">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&display=swap" rel="stylesheet">
 
-  <!-- AOS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link href="images/favicon.png" rel="icon">
-  <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&display=swap" rel="stylesheet">
-
-  <style>
+<style>
     :root{
-      --accent-red:#d9463e;
-      --accent-soft:#ff7d5c;
-      --text-dark:#1e1e1e;
-      --text-muted:#4b5563;
+        --accent-red:#d9463e;
+        --accent-soft:#ff7d5c;
+        --text-dark:#1e1e1e;
+        --text-muted:#4b5563;
+
+        /* NEW ABOUT SECTION VARIABLES */
+        --new-lex-red: #d9463e;
+        --new-lex-dark: #1e1e1e;
+        --new-lex-light: #fefcfc; /* Very subtle off-white background */
+        --new-lex-muted: #4b5563;
     }
 
     body{
-      margin:0;
-      font-family:"Inter", sans-serif;
-      color:var(--text-dark);
-      background:#ffffff;
+        margin:0;
+        font-family:"Inter", sans-serif;
+        color:var(--text-dark);
+        background:#ffffff;
     }
 
     /* ==========================
-       NAVBAR
-       ==========================*/
+    NAVBAR
+    ==========================*/
     .navbar-custom{
-      padding:1.1rem 2rem;
-      position:fixed;
-      width:100%;
-      top:0;
-      left:0;
-      z-index:20;
-      transition:all .3s ease;
-      background:rgba(255,255,255,0.1);
-      backdrop-filter:blur(6px);
-    }
-
-    .navbar-custom.scrolled{
-      background:white;
-      box-shadow:0 2px 12px rgba(0,0,0,0.08);
-      backdrop-filter:blur(0px);
-    }
-
-    .navbar-brand{
-      font-family:"Poppins", sans-serif;
-      font-weight:600;
-      font-size:1.45rem;
-      color:#181818 !important;
-      letter-spacing:-0.5px;
-/*      margin-top: ;*/
-    }
-
-    .nav-link{
-      font-size:0.95rem;
-      font-weight:500;
-      margin:0 0.4rem;
-      color:#333 !important;
-      transition:.2s ease;
-    }
-
-    .nav-link:hover{
-      color:var(--accent-red) !important;
-    }
-
-    /* ==========================
-       HERO
-       ==========================*/
-    .hero{
-      position:relative;
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:7rem 1.5rem 4rem;
-      background-image:url("images/hero3.jpg");
-      background-size:cover;
-      background-position:center;
-    }
-
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(115deg,
-          rgba(255,255,255,0.98) 0%,
-          rgba(255,255,255,0.92) 40%,
-          rgba(255,255,255,0.65) 70%,
-          rgba(255,255,255,0.15) 100%);
-      backdrop-filter:blur(4px);
-    }
-
-    .hero-inner{
-      position:relative;
-      z-index:3;
-      width:100%;
-      max-width:960px;
-      margin:0 auto;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      text-align:center;
-    }
-
-    .hero-eyebrow{
-      font-size:.85rem;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      color:var(--text-muted);
-      margin-bottom:.9rem;
-    }
-
-    .hero-title-main{
-      font-family:"Manrope", sans-serif;
-      font-weight:600;
-      font-size:3.9rem;
-      letter-spacing:-0.03em;
-      color:#181818;
-      margin-bottom:.8rem;
-      line-height:1.15;
-    }
-
-    .hero-title-main span{
-      color:#111;
-    }
-
-    .hero-title-main-brand{
-      display:inline-flex;
-      align-items:center;
-      gap:.55rem;
-      padding:.45rem 1.4rem;
-      border-radius:999px;
-      background:rgba(255,255,255,0.85);
-      box-shadow:0 14px 35px rgba(15,23,42,0.16);
-      border:1px solid rgba(148,163,184,0.35);
-    }
-
-    .hero-logo-dot{
-      width:11px;
-      height:11px;
-      border-radius:999px;
-      background:linear-gradient(135deg, var(--accent-red), var(--accent-soft));
-      box-shadow:0 0 0 4px rgba(248,113,113,0.25);
-      flex-shrink:0;
-    }
-
-    .hero-title-subline{
-      display:block;
-      margin-top:.25rem;
-      font-size:1.05rem;
-      font-weight:500;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:#6b7280;
-    }
-
-    .hero-title-divider{
-      width:80px;
-      height:3px;
-      background:var(--accent-red);
-      margin:1.1rem auto 1.7rem;
-      border-radius:999px;
-      opacity:.95;
-    }
-
-    .hero-subtitle{
-      font-size:1.08rem;
-      color:#374151;
-      max-width:38rem;
-      margin:0 auto 2.2rem;
-      line-height:1.7;
-    }
-
-    .highlight{
-      background:rgba(217,70,62,0.12);
-      padding:2px 5px;
-      border-radius:4px;
-      font-weight:500;
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:.75rem 1rem;
-      align-items:center;
-      justify-content:center;
-      margin-bottom:2.4rem;
-    }
-
-    .btn-lex-main{
-      padding:.9rem 2.5rem;
-      border-radius:999px;
-      font-size:0.95rem;
-      font-weight:600;
-      text-decoration:none;
-      background:var(--accent-red);
-      color:white;
-      border:none;
-      transition:.25s ease;
-      box-shadow:0 8px 20px rgba(217,70,62,.25);
-    }
-
-    .btn-lex-main:hover{
-      background:#be3b36;
-      transform:translateY(-3px);
-      box-shadow:0 12px 26px rgba(217,70,62,.35);
-    }
-
-    .btn-lex-main span.arrow{
-      opacity:.9;
-      margin-left:.2rem;
-    }
-
-    .btn-lex-outline{
-      padding:.9rem 2.3rem;
-      border-radius:999px;
-      font-size:0.95rem;
-      font-weight:600;
-      text-decoration:none;
-      background:transparent;
-      color:var(--accent-red);
-      border:1px solid rgba(217,70,62,0.8);
-      transition:.25s ease;
-      box-shadow:none;
-    }
-
-    .btn-lex-outline:hover{
-      background:rgba(217,70,62,0.06);
-      color:#b91c1c;
-      border-color:var(--accent-red);
-    }
-
-    .hero-data{
-      margin-top:0.5rem;
-      padding-top:1.6rem;
-      border-top:1px solid #e5e7eb;
-      display:flex;
-      justify-content:center;
-      gap:3rem;
-      flex-wrap:wrap;
-    }
-
-    .hero-data > div{
-      min-width:150px;
-      text-align:center;
-    }
-
-    .hero-data-number{
-      font-size:2.1rem;
-      font-weight:700;
-      color:var(--accent-red);
-    }
-
-    .hero-data-label{
-      font-size:.86rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:#6b7280;
-      margin-top:.15rem;
-    }
-
-    @media(max-width:767.98px){
-      .hero-title-main{
-        font-size:2.5rem;
-      }
-      .btn-lex-main,
-      .btn-lex-outline{
+        padding:1.1rem 2rem;
+        position:fixed;
         width:100%;
+        top:0;
+        left:0;
+        z-index:20;
+        transition:all .3s ease;
+        background:rgba(255,255,255,0.1);
+        backdrop-filter:blur(6px);
+    }
+    .navbar-custom.scrolled{
+        background:white;
+        box-shadow:0 2px 12px rgba(0,0,0,0.08);
+        backdrop-filter:blur(0px);
+    }
+    .navbar-brand{
+        font-family:"Poppins", sans-serif;
+        font-weight:600;
+        font-size:1.45rem;
+        color:#181818 !important;
+        letter-spacing:-0.5px;
+    }
+    .nav-link{
+        font-size:0.95rem;
+        font-weight:500;
+        margin:0 0.4rem;
+        color:#333 !important;
+        transition:.2s ease;
+    }
+    .nav-link:hover{ color:var(--accent-red) !important; }
+
+    /* ==========================
+    HERO
+    ==========================*/
+    .hero{
+        position:relative;
+        min-height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:7rem 1.5rem 4rem;
+        background-image:url("images/hero3.jpg");
+        background-size:cover;
+        background-position:center;
+    }
+    .hero::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:
+            linear-gradient(125deg,
+                rgba(255,255,255,0.98) 0%,
+                rgba(255,255,255,0.92) 40%,
+                rgba(255,255,255,0.65) 70%,
+                rgba(255,255,255,0.15) 100%);
+        backdrop-filter: blur(4px);
+    }
+    .hero-inner{
+        position:relative;
+        z-index:3;
+        width:100%;
+        max-width:960px;
+        margin:0 auto;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
         text-align:center;
-      }
+    }
+    .hero-eyebrow{
+        font-size:.85rem;
+        letter-spacing:.22em;
+        text-transform:uppercase;
+        color:var(--text-muted);
+        margin-bottom:.9rem;
+    }
+    .hero-title-main{
+        font-family:"Manrope", sans-serif;
+        font-weight:600;
+        font-size:3.9rem;
+        letter-spacing:-0.03em;
+        color:#181818;
+        margin-bottom:.8rem;
+        line-height:1.15;
+    }
+    .hero-subtitle{
+        font-size:1.08rem;
+        color:#374151;
+        max-width:38rem;
+        margin:0 auto 2.2rem;
+        line-height:1.7;
+    }
+    .hero-actions{
+        display:flex;
+        flex-wrap:wrap;
+        gap:.75rem 1rem;
+        align-items:center;
+        justify-content:center;
+        margin-bottom:2.4rem;
+    }
+    .btn-lex-main{
+        padding:.9rem 2.5rem;
+        border-radius:999px;
+        font-size:0.95rem;
+        font-weight:600;
+        text-decoration:none;
+        background:var(--accent-red);
+        color:white;
+        border:none;
+        transition:.25s ease;
+        box-shadow:0 8px 20px rgba(217,70,62,.25);
+    }
+    .btn-lex-main:hover{
+        background:#be3b36;
+        transform:translateY(-3px);
+        box-shadow:0 12px 26px rgba(217,70,62,.35);
+    }
+    .btn-lex-outline{
+        padding:.9rem 2.3rem;
+        border-radius:999px;
+        font-size:0.95rem;
+        font-weight:600;
+        text-decoration:none;
+        background:transparent;
+        color:var(--accent-red);
+        border:1px solid rgba(217,70,62,0.8);
+        transition:.25s ease;
+        box-shadow:none;
+    }
+    .btn-lex-outline:hover{
+        background:rgba(217,70,62,0.06);
+        color:#b91c1c;
+        border-color:var(--accent-red);
+    }
+    .hero-data-new{
+        width: 100%;
+        max-width: 800px;
+        margin-top: 3rem !important;
+        padding: 1.8rem 0;
+        border-top: 1px solid #e5e7eb;
+        display: flex;
+        justify-content: space-around;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        backdrop-filter: blur(5px);
+    }
+    .hero-data-item{
+        min-width: 100px;
+        text-align: center;
+        padding: 0 1rem;
+    }
+    .hero-data-number{
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: var(--accent-red);
+        line-height: 1.1;
+    }
+    .hero-data-label{
+        font-size: .8rem;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+        color: #374151;
+        margin-top: .4rem;
+    }
+    @media(max-width:767.98px){
+        .hero-title-main{ font-size: 2.8rem; }
+        .btn-lex-main, .btn-lex-outline{ width:100%; text-align:center; }
+        .hero-data-new{
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem !important;
+        }
+        .hero-data-item{ margin-bottom: 1rem; }
+        .hero-data-number{ font-size: 2.2rem; }
     }
 
     /* ==========================
-       ABOUT SECTION
+       NEW ABOUT SECTION STYLES (MODIFIED FOR TWO-COLUMN)
        ==========================*/
-    .about-section{
-      background:#fafafa;
+    .about-new-section {
+        background: var(--new-lex-light);
+        padding: 6rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+    /* The original .about-header-text is no longer used for the main block */
+    .about-new-title {
+        font-family: "Manrope", sans-serif;
+        font-size: 3rem;
+        font-weight: 700;
+        letter-spacing: -0.05em;
+        color: var(--new-lex-dark);
+        margin-bottom: 0.8rem;
+        text-align: left; /* Ensure left alignment in new structure */
+    }
+    .about-new-title span { color: var(--new-lex-red); }
+    .about-new-subtitle {
+        font-size: 1.15rem;
+        color: var(--new-lex-muted);
+        line-height: 1.7;
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: left; /* Ensure left alignment in new structure */
     }
 
-    .about-title{
-      font-family:"Poppins", sans-serif;
-      font-size:2.4rem;
-      font-weight:600;
-      letter-spacing:-0.5px;
-      color:#1e1e1e;
+    /* Removing old visual block styles */
+    .about-visuals-block { display: none !important; }
+    .main-image-container, .detail-image-1, .detail-image-2 { display: none !important; }
+
+    /* New Styles for the Right-Side Image */
+    .about-right-image-wrapper {
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        background: linear-gradient(135deg, rgba(217,70,62,0.10), rgba(0,0,0,0.04));
+        padding: 15px; /* Creates a small border effect */
+    }
+    .about-right-image-style {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        object-fit: cover;
+        aspect-ratio: 4/3; /* Set a common aspect ratio for structure */
+    }
+    
+    /* Simplified Feature Card style (replacing the old feature-card-new block) */
+    .new-feature-item {
+        padding: 1.2rem;
+        border-radius: 12px;
+        transition: background 0.3s ease;
     }
 
-    .about-title span{
-      color:var(--accent-red);
+    .new-feature-item:hover {
+        background: rgba(217, 70, 62, 0.04);
     }
 
-    .about-divider{
-      width:70px;
-      height:3px;
-      background:var(--accent-red);
-      margin:1rem 0 1.8rem;
-      border-radius:4px;
+    /* Reusing these titles/text but adapting their context */
+    .feature-card-title-new {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--new-lex-dark);
+        margin-bottom: 0.8rem;
+    }
+    .feature-card-text-new {
+        font-size: 0.95rem;
+        color: var(--new-lex-muted);
+        line-height: 1.7;
     }
 
-    .about-text{
-      font-size:1.05rem;
-      line-height:1.7;
-      color:#444;
-      margin-bottom:1.2rem;
-    }
 
-    .about-img-wrapper{
-      border-radius:16px;
-      overflow:hidden;
-      box-shadow:0 12px 30px rgba(0,0,0,0.1);
+    @media (max-width: 991.98px) {
+        .about-new-title { font-size: 2.5rem; text-align: center; }
+        .about-new-subtitle { text-align: center; }
+        .about-right-image-wrapper { margin-bottom: 2.5rem; }
+        .new-feature-item { padding: 1rem 0; }
     }
+    @media (max-width: 767.98px) {
+        .about-new-title { font-size: 2rem; }
+        .about-new-section { padding: 4rem 0; }
+    }
+    
+    /* The original old feature card styles are now irrelevant as they are not used */
+    .feature-card-new, .feature-card-icon-new { display: none; }
 
-    .about-img{
-      width:100%;
-      height:auto;
-      display:block;
+
+    /* ==========================
+    RESEARCH SECTION
+    ==========================*/
+    .research-section{
+        background:#fffafa;
+        padding:6rem 0;
+        position:relative;
+        overflow:hidden;
+    }
+    .research-section::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:radial-gradient(circle at top left, rgba(217,70,62,0.05), transparent 50%);
+        pointer-events:none;
+    }
+    .research-title{
+        font-family:"Poppins", sans-serif;
+        font-size:2.4rem;
+        font-weight:600;
+        letter-spacing:-0.5px;
+        color:#1e1e1e;
+        margin-bottom:.5rem;
+    }
+    .research-title span{ color:var(--accent-red); }
+    .research-divider{
+        width:70px;
+        height:3px;
+        background:var(--accent-red);
+        margin:1rem 0 1.8rem;
+        border-radius:4px;
+    }
+    .research-subtitle{
+        max-width:700px;
+        color:#4b5563;
+        font-size:1.05rem;
+        line-height:1.7;
+        margin-bottom:3rem;
     }
 
     /* ==========================
-       COMPETITIONS / CONTESTS SECTION
-       ==========================*/
-    .contest-section{
-      background:#f9fafb;
-      padding:4.5rem 0 5rem;
-      position:relative;
+       RESEARCH HORIZONTAL TIMELINE (UPDATED)
+       ========================== */
+    .research-timeline{
+        position: relative;
+        margin: 2.5rem 0 3rem;
+        padding-top: 2rem;
     }
-
-    .contest-section::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:radial-gradient(circle at top right, rgba(217,70,62,0.05), transparent 60%);
-      pointer-events:none;
+    .research-timeline::before{
+        content:"";
+        position:absolute;
+        left:0;
+        right:0;
+        top:64px;
+        height:2px;
+        background:linear-gradient(
+            90deg,
+            rgba(217,70,62,0.1),
+            rgba(217,70,62,0.45),
+            rgba(217,70,62,0.1)
+        );
     }
-
-    .contest-title{
-      font-family:"Poppins", sans-serif;
-      font-size:2.4rem;
-      font-weight:600;
-      letter-spacing:-0.5px;
-      color:#1e1e1e;
+    .timeline-step{
+        background:#ffffff;
+        border:1px solid #fecaca;
+        border-radius:16px;
+        padding:2.2rem 2rem 2rem;
+        height:100%;
+        box-shadow:0 10px 28px rgba(0,0,0,0.05);
+        transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
     }
-
-    .contest-title span{
-      color:var(--accent-red);
+    .timeline-step:hover{
+        transform:translateY(-8px);
+        box-shadow:0 18px 46px rgba(0,0,0,0.12);
+        border-color:rgba(217,70,62,0.4);
     }
-
-    .contest-divider{
-      width:70px;
-      height:3px;
-      background:var(--accent-red);
-      border-radius:4px;
-      margin:1rem 0 1.8rem;
+    .timeline-header{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        margin-bottom:1.2rem;
+        gap: 12px;
     }
-
-    .contest-subtitle{
-      max-width:540px;
-      color:#4b5563;
-      font-size:1.05rem;
-      line-height:1.7;
-    }
-
-    .contest-eyebrow{
-      font-size:.8rem;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      color:var(--text-muted);
-      margin-bottom:.4rem;
-    }
-
-    .contest-subsection{
-      position:relative;
-      padding:3rem 0;
-      border-top:1px solid #e5e7eb;
-    }
-
-    .contest-subsection:first-of-type{
-      margin-top:1.5rem;
-      border-top:none;
-    }
-
-    .contest-subsection-inner{
-      position:relative;
-      z-index:1;
-    }
-
-    .contest-subtitle-bar{
-      display:inline-flex;
-      align-items:center;
-      gap:.6rem;
-      margin-bottom:.7rem;
-    }
-
-    .contest-subtitle-pill{
-      padding:.25rem .95rem;
-      border-radius:999px;
-      border:none;
-      font-size:.8rem;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      background:linear-gradient(135deg, rgba(217,70,62,0.14), rgba(255,125,92,0.12));
-      color:#b91c1c;
-      box-shadow:0 8px 18px rgba(248,113,113,0.15);
-    }
-
-    .contest-name{
-      font-family:"Poppins", sans-serif;
-      font-size:1.5rem;
-      font-weight:600;
-      color:#111827;
-      margin-bottom:.45rem;
-    }
-
-    .contest-tagline{
-      font-size:.95rem;
-      color:#6b7280;
-      margin-bottom:1.1rem;
-      max-width:500px;
-    }
-
-    .contest-desc{
-      font-size:1.01rem;
-      color:#4b5563;
-      text-align: justify;
-      line-height:1.7;
-      margin-bottom:1rem;
-    }
-
-    .contest-points{
-      list-style:none;
-      padding-left:0;
-      margin:0 0 1.2rem;
-    }
-
-    .contest-points li{
-      display:flex;
-      align-items:flex-start;
-      gap:.55rem;
-      font-size:.9rem;
-      color:#4b5563;
-      margin-bottom:.45rem;
-    }
-
-    .contest-points li::before{
-      content:"▹";
-      font-size:.8rem;
-      margin-top:.15rem;
-      color:var(--accent-red);
-    }
-
-    .contest-img-wrapper{
-      border-radius:20px;
-      overflow:hidden;
-      position:relative;
-      min-height:230px;
-    }
-
-    .contest-img-overlay{
-      position:absolute;
-      inset:0;
-      background:linear-gradient(to top right, rgba(15,23,42,0.35), transparent 55%);
-      opacity:.35;
-      pointer-events:none;
-    }
-
-    .contest-img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transform:scale(1.03);
-      transition:transform .6s ease;
-      display:block;
-    }
-
-    .contest-subsection:hover .contest-img{
-      transform:scale(1.07);
-    }
-
-    @media (max-width:991.98px){
-      .contest-subsection{
-        padding:2.4rem 0;
-      }
-      .contest-img-wrapper{
-        margin-top:1.4rem;
-        min-height:200px;
-      }
-    }
-
-    @media (max-width:767.98px){
-      .contest-title{
+    .timeline-dot{
+        width:64px;
+        height:64px;
+        border-radius:50%;
+        background:var(--accent-red);
+        color:#fff;
+        display:flex;
+        align-items:center;
+        justify-content:center;
         font-size:1.9rem;
-      }
-      .contest-section{
-        padding:3.5rem 0 4rem;
-      }
+        box-shadow:0 10px 24px rgba(217,70,62,0.35);
+        position:relative;
+        z-index:2;
+        flex: 0 0 auto;
     }
-  </style>
-  <style>
-.ilo-mini-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: #f7f9fc;
-  padding: 14px 18px;
-  border-radius: 8px;
-  margin: 24px 0;
-}
-.ilo-year {
-  font-weight: 700;
-  color: #1e3a8a;
-  font-size: 1.1rem;
-  padding-right: 14px;
-  border-right: 2px solid #1e3a8a;
-}
-.ilo-text {
-  font-size: 0.95rem;
-  color: #334155;
-}
+    .timeline-step-label{
+        font-size:.75rem;
+        letter-spacing:.22em;
+        text-transform:uppercase;
+        font-weight:700;
+        color:#b91c1c;
+        background:rgba(217,70,62,0.12);
+        padding:.4rem .85rem;
+        border-radius:999px;
+        white-space: nowrap;
+    }
+    .timeline-title{
+        font-family:"Poppins", sans-serif;
+        font-size:1.35rem;
+        font-weight:700;
+        color:#111827;
+        margin-bottom:.7rem;
+    }
+    .timeline-text{
+        font-size:.96rem;
+        color:#4b5563;
+        line-height:1.7;
+        margin:0;
+    }
+    .research-timeline .col-lg-4{
+        position:relative;
+    }
+    .research-timeline .col-lg-4::before{
+        content:"";
+        position:absolute;
+        top:64px;
+        left:-16px;
+        width:32px;
+        height:2px;
+        background:rgba(217,70,62,0.25);
+    }
+    .research-timeline .col-lg-4:first-child::before{ display:none; }
+    @media (max-width: 991.98px){
+        .research-timeline::before{ display:none; }
+        .research-timeline .col-lg-4::before{ display:none; }
+        .timeline-step{ padding:1.8rem 1.6rem; }
+        .timeline-dot{ width:56px; height:56px; font-size:1.6rem; }
+    }
+
+    /* ==========================
+    FIELD IMAGE CARDS (FANCY MODERN STYLE)
+    ==========================*/
+    .field-image-card{
+        position: relative;
+        overflow: hidden;
+        border-radius: 18px;
+        height: 280px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        perspective: 1000px;
+        transform-style: preserve-3d;
+        transition: transform .4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                    box-shadow .4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        cursor: pointer;
+    }
+    .field-image-card img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.05);
+        transition: transform .6s ease-out;
+        will-change: transform;
+    }
+    .field-card-overlay{
+        position: absolute;
+        inset: 0;
+        padding: 20px;
+        background: linear-gradient(to top,
+            rgba(0,0,0,0.85) 0%,
+            rgba(0,0,0,0.4) 40%,
+            rgba(217, 70, 62, 0.05) 100%
+        );
+        transition: background .3s ease;
+    }
+    .field-card-title{
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #fff;
+        text-shadow: 0 3px 8px rgba(0,0,0,0.7);
+        transition: transform .4s ease-out, opacity .4s ease;
+        will-change: transform;
+    }
+    .field-card-description{
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        margin: 0;
+        font-size: .95rem;
+        line-height: 1.5;
+        color: rgba(255,255,255,0.95);
+        text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+        opacity: 0;
+        transform: translateY(100px);
+        transition: opacity .4s ease, transform .4s ease;
+        will-change: opacity, transform;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .field-image-card:hover,
+    .field-image-card:focus-within{
+        transform: translateY(-8px) rotateY(-1deg) rotateX(1deg);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+    .field-image-card:hover img,
+    .field-image-card:focus-within img{
+        transform: scale(1.15);
+    }
+    .field-image-card:hover .field-card-title,
+    .field-image-card:focus-within .field-card-title{
+        transform: translateY(-105px);
+        font-size: 1.3rem;
+    }
+    .field-image-card:hover .field-card-description,
+    .field-image-card:focus-within .field-card-description{
+        opacity: 1;
+        transform: translateY(-30px);
+    }
+    @media (max-width: 575.98px){
+        .field-image-card{ height: 260px; }
+        .field-card-title{ font-size: 1.2rem; bottom: 18px; }
+        .field-card-description{ font-size: .85rem; -webkit-line-clamp: 4; }
+        .field-image-card:hover .field-card-title{ transform: translateY(-70px); }
+        .field-image-card:hover .field-card-description{ transform: translateY(-20px); }
+    }
+    @media (prefers-reduced-motion: reduce){
+        .field-image-card,
+        .field-image-card img,
+        .field-card-title,
+        .field-card-description{
+            transition: none !important;
+            transform: none !important;
+        }
+        .field-card-description{ opacity: 0; }
+        .field-image-card:hover .field-card-description{ opacity: 1; }
+    }
+
+    /* ==========================
+    CONTEST SECTION
+    ==========================*/
+    .contest-section{
+        background:#f9fafb;
+        padding:4.5rem 0 5rem;
+        position:relative;
+    }
+    .contest-section::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:radial-gradient(circle at top right, rgba(217,70,62,0.05), transparent 60%);
+        pointer-events:none;
+    }
+    .contest-title{
+        font-family:"Poppins", sans-serif;
+        font-size:2.4rem;
+        font-weight:600;
+        letter-spacing:-0.5px;
+        color:#1e1e1e;
+    }
+    .contest-divider{
+        width:70px;
+        height:3px;
+        background:var(--accent-red);
+        border-radius:4px;
+        margin:1rem 0 1.8rem;
+    }
+    .contest-eyebrow{
+        font-size:.8rem;
+        letter-spacing:.22em;
+        text-transform:uppercase;
+        color:var(--text-muted);
+        margin-bottom:.4rem;
+    }
+    .contest-subsection{
+        position:relative;
+        padding:3rem 0;
+        border-top:1px solid #e5e7eb;
+    }
+    .contest-subsection:first-of-type{
+        margin-top:0.1rem;
+        border-top:none;
+    }
+    .contest-subtitle-bar{
+        display:inline-flex;
+        align-items:center;
+        gap:.6rem;
+        margin-bottom:.7rem;
+    }
+    .contest-subtitle-pill{
+        padding:.25rem .95rem;
+        border-radius:999px;
+        border:none;
+        font-size:.8rem;
+        letter-spacing:.16em;
+        text-transform:uppercase;
+        background:linear-gradient(135deg, rgba(217,70,62,0.14), rgba(255,125,92,0.12));
+        color:#b91c1c;
+        box-shadow:0 8px 18px rgba(248,113,113,0.15);
+    }
+    .contest-name{
+        font-family:"Poppins", sans-serif;
+        font-size:1.5rem;
+        font-weight:600;
+        color:#111827;
+        margin-bottom:.45rem;
+    }
+    .contest-tagline{
+        font-size:.95rem;
+        color:#6b7280;
+        margin-bottom:1.1rem;
+        max-width:500px;
+    }
+    .contest-desc{
+        font-size:1.01rem;
+        color:#4b5563;
+        text-align: justify;
+        line-height:1.7;
+        margin-bottom:1rem;
+    }
+    .contest-points{
+        list-style:none;
+        padding-left:0;
+        margin:0 0 1.2rem;
+    }
+    .contest-points li{
+        display:flex;
+        align-items:flex-start;
+        gap:.55rem;
+        font-size:.9rem;
+        color:#4b5563;
+        margin-bottom:.45rem;
+    }
+    .contest-points li::before{
+        content:"▹";
+        font-size:.8rem;
+        margin-top:.15rem;
+        color:var(--accent-red);
+    }
+    .contest-img-wrapper{
+        border-radius:20px;
+        overflow:hidden;
+        position:relative;
+    }
+    .contest-img-overlay{
+        position:absolute;
+        inset:0;
+        background:linear-gradient(to top right, rgba(15,23,42,0.35), transparent 55%);
+        opacity:.35;
+        pointer-events:none;
+    }
+    .contest-img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        transform:scale(1.03);
+        transition:transform .6s ease;
+        display:block;
+    }
+    .contest-subsection:hover .contest-img{ transform:scale(1.07); }
+    @media (max-width:991.98px){
+        .contest-subsection{ padding:2.4rem 0; }
+        .contest-img-wrapper{ margin-top:1.4rem; min-height:200px; }
+    }
+    @media (max-width:767.98px){
+        .contest-title{ font-size:1.9rem; }
+        .contest-section{ padding:3.5rem 0 4rem; }
+    }
+
+    /* ==========================
+    CTA SECTION
+    ==========================*/
+    @keyframes subtle-move {
+        0% { transform: scale(1) translate(0, 0); opacity: 0.8; }
+        50% { transform: scale(1.1) translate(10px, -10px); opacity: 0.95; }
+        100% { transform: scale(1) translate(0, 0); opacity: 0.8; }
+    }
+    .cta-section{
+        padding: 5rem 0;
+        background: #fafafa;
+        color: var(--text-dark);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        background-image: radial-gradient(circle at top right, rgba(217,70,62,0.03), transparent 60%);
+    }
+    .cta-section::after{
+        content:'';
+        position:absolute;
+        top:0; left:0;
+        width:100%; height:100%;
+        background:
+            radial-gradient(circle at 120% 120%, rgba(217, 70, 62, 0.05) 5%, transparent 50%),
+            radial-gradient(circle at -20% -20%, rgba(217, 70, 62, 0.04) 5%, transparent 50%);
+        opacity:0.8;
+        z-index:1;
+        pointer-events:none;
+        animation: subtle-move 18s ease-in-out infinite alternate;
+    }
+    .cta-inner-card{
+        background: transparent;
+        padding: 0;
+        border: none;
+        position: relative;
+        z-index: 2;
+    }
+    .cta-title{
+        font-family:"Poppins", sans-serif;
+        font-size: 2.8rem;
+        font-weight: 700;
+        letter-spacing: -0.05em;
+        margin-bottom: 0.75rem;
+        color: var(--text-dark);
+    }
+    .cta-subtitle{
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto 2.5rem;
+        line-height: 1.6;
+        opacity: 0.95;
+        font-weight: 500;
+        color: var(--text-muted);
+    }
+    .btn-cta-light{
+        padding: 1rem 3rem;
+        border-radius: 999px;
+        font-size: 1.05rem;
+        font-weight: 700;
+        text-decoration: none;
+        background: var(--accent-red);
+        color: white;
+        border: none;
+        box-shadow:0 8px 20px rgba(217,70,62,.25);
+        transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+        display:inline-block;
+    }
+    .btn-cta-light:hover{
+        background: #be3b36;
+        transform: translateY(-3px);
+        box-shadow:0 12px 26px rgba(217,70,62,.35);
+    }
+    @media (max-width: 767.98px){
+        .cta-section{ padding: 3.5rem 0; }
+        .cta-title{ font-size: 2.2rem; }
+        .btn-cta-light{
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
+        }
+    }
+
+    .ilo-mini-row{
+        display:flex;
+        align-items:center;
+        gap:14px;
+        background:#f7f9fc;
+        padding:14px 18px;
+        border-radius:8px;
+        margin:24px 0;
+    }
+    .ilo-year{
+        font-weight:700;
+        color:#1e3a8a;
+        font-size:1.1rem;
+        padding-right:14px;
+        border-right:2px solid #1e3a8a;
+    }
+    .ilo-text{
+        font-size:0.95rem;
+        color:#334155;
+    }
 </style>
 </head>
 
 <body>
 
-<!-- ==========================
-     NAVBAR
-     ==========================-->
 <nav class="navbar navbar-expand-lg navbar-custom">
-  <a class="navbar-brand" href="#"><img src="images/logo.png" style="max-height: 34px;" class="me-2 mb-1"><span style="margin-top:25px; color:#0A1A33 !important; letter-spacing: 4px !important;">LEX</span></a>
+<a class="navbar-brand" href="#">
+    <img src="images/logo.png" style="max-height: 34px;" class="me-2 mb-1" alt="LEX logo">
+    <span style="margin-top:25px; color:#0A1A33 !important; letter-spacing: 4px !important;">LEX</span>
+</a>
 
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-    <span class="navbar-toggler-icon"></strong>
-  </button>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+    <span class="navbar-toggler-icon"></span>
+</button>
 
-  <div class="collapse navbar-collapse" id="navMenu">
+<div class="collapse navbar-collapse" id="navMenu">
     <ul class="navbar-nav ms-auto">
-      <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-      <li class="nav-item"><a class="nav-link" href="#contests">Programs</a></li>
-      <!-- <li class="nav-item"><a class="nav-link" href="#contests">Schools</a></li> -->
-      <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contests">Programs</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
     </ul>
-  </div>
+</div>
 </nav>
 
-
-<!-- ==========================
-     HERO SECTION
-     ==========================-->
 <section class="hero">
-  <div class="hero-inner">
-
-    <div data-aos="fade-up">
-      <div class="hero-eyebrow">Inspiring Young Innovators</div>
-      <h1 class="hero-title-main">
-        <span style="color:#0A1A33 !important; letter-spacing: 10px !important;">LEX</strong>
-      </h1>
+<div class="hero-inner">
+    <div data-aos="fade-up" data-aos-duration="1000">
+        <div class="hero-eyebrow">Inspiring Young Innovators</div>
+        <h1 class="hero-title-main">
+            <span style="color:#0A1A33 !important; letter-spacing: 10px !important;">LEX</span>
+        </h1>
     </div>
 
-<div class="hero-subtitle" data-aos="fade-up" data-aos-delay="80">
-  LEX partners with institutions to design 
-  <strong>various contests</strong> <br> and 
-  <strong>academic activity programs</strong> in South Korea.
-</div>
-
-
-    <div class="hero-actions" data-aos="fade-up" data-aos-delay="140">
-      <a href="#about" class="btn-lex-main">
-        Learn More <span class="arrow">→</strong>
-      </a>
-      <a href="#contact" class="btn-lex-outline">
-        Contact Us
-      </a>
+    <div class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">
+        LEX partners with institutions to design
+        <strong>various contests</strong> <br> and
+        <strong>academic activity programs</strong> in South Korea.
     </div>
-  </div>
-</section>
 
-<!-- ==========================
-     ABOUT SECTION
-     ==========================-->
-<section id="about" class="about-section py-5 py-md-6">
-  <div class="container">
+    <div class="hero-actions" data-aos="fade-up" data-aos-delay="200">
+        <a href="#about" class="btn-lex-main">
+            Explore Our Programs <span class="arrow">→</span>
+        </a>
+        <a href="#research" class="btn-lex-outline">
+            Research Opportunities
+        </a>
+    </div>
 
-    <div class="row align-items-center g-5">
-      
-      <!-- Left Text -->
-      <div class="col-lg-6" data-aos="fade-right">
-        <h2 class="about-title">About <span>LEX</strong></h2>
-        <div class="about-divider"></div>
-
-          <p class="about-text" style="text-align: justify;">
-LEX is a academic training and mentorship organization
-recognized for collaborating with leading international schools, academies,
-and educational institutions across Asia and beyond. We specialize in
-<strong>various contests preparation</strong>, national and international competitions in <strong>South Korea</strong>,
-and advanced enrichment programs for students who aim to excel in computer science,
-engineering, and mathematics.
-        </p>
-
-        <p class="about-text" style="text-align: justify;">
-Our organization proudly serves as the regional partner for several <strong>international-level competitions</strong> in South Korea. Our mission is to operate these contests with the highest level of integrity while expanding access and awareness for students across the country.
-        </p>
-
-                <p class="about-text mb-4" style="text-align: justify;">
-We currently run the <strong>International Logic Olympiad, Technovation Girls Challenge, VEX Competition [Korea Open], and the American Computer Science League (ACSL)</strong> in South Korea, and we are actively exploring additional competitions for the 2026 season.
-        </p>
-      </div>
-
-      <!-- Right Image -->
-      <div class="col-lg-6" data-aos="fade-left">
-        <div class="about-img-wrapper">
-          <img src="images/about3.jpg" class="about-img" alt="About Lex">
+    <div class="hero-data-new mt-5 pt-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="hero-data-item">
+            <div class="hero-data-number" data-target="70" data-suffix="+">0</div>
+            <div class="hero-data-label">Global Partners</div>
         </div>
-      </div>
-
+        <div class="hero-data-item">
+            <div class="hero-data-number" data-target="5" data-suffix="K+">0</div>
+            <div class="hero-data-label">Students Impacted</div>
+        </div>
+        <div class="hero-data-item">
+            <div class="hero-data-number" data-target="15" data-suffix="+">0</div>
+            <div class="hero-data-label">International Competitions</div>
+        </div>
     </div>
-
-  </div>
+</div>
 </section>
 
-<!-- ==========================
-     COMPETITIONS / CONTESTS SECTION
-     ==========================-->
+<section id="about" class="about-new-section">
+    <div class="container">
+        <div class="row align-items-center gx-5">
+            
+                        <div class="col-lg-6 order-lg-1 order-2" data-aos="fade-right">
+                <h2 class="about-new-title" style="margin-bottom: 1.5rem;">Empowering the Next Generation of <span>Innovators</span></h2>
+                <p class="about-new-subtitle" style="margin-bottom: 2.5rem; max-width: none;">
+                    LEX is an elite academic organization dedicated to unlocking the highest potential in Asian students through rigorous research and world-class competition programs. Our focus is on tangible outcomes for university applications.
+                </p>
+
+                <div class="new-feature-block mb-4">
+                    <div class="new-feature-item d-flex align-items-start mb-4">
+                        <i class="bi bi-person-video2 flex-shrink-0 me-3" style="font-size: 1.8rem; color: var(--new-lex-red);"></i>
+                        <div>
+                            <h4 class="feature-card-title-new" style="font-size: 1.25rem; margin-bottom: 0.4rem;">Global Research Mentorship</h4>
+                            <p class="feature-card-text-new">
+                                Personalized, one-on-one research projects guided by distinguished faculty from top-tier global universities.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="new-feature-item d-flex align-items-start mb-4">
+                        <i class="bi bi-award flex-shrink-0 me-3" style="font-size: 1.8rem; color: var(--new-lex-red);"></i>
+                        <div>
+                            <h4 class="feature-card-title-new" style="font-size: 1.25rem; margin-bottom: 0.4rem;">Official Competition Partner</h4>
+                            <p class="feature-card-text-new">
+                                Regional partner for major international contests (VEX, CREATE), providing official qualification pathways.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="new-feature-item d-flex align-items-start">
+                        <i class="bi bi-book flex-shrink-0 me-3" style="font-size: 1.8rem; color: var(--new-lex-red);"></i>
+                        <div>
+                            <h4 class="feature-card-title-new" style="font-size: 1.25rem; margin-bottom: 0.4rem;">Portfolio & Publication Power</h4>
+                            <p class="feature-card-text-new">
+                                Programs culminate in a significant, tangible outcome—a publication-ready paper or high-level international award.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#research" class="btn-lex-main mt-5" style="padding: 0.75rem 2rem; font-size: 0.9rem;">
+                    View Research Tracks <i class="bi bi-arrow-right-short"></i>
+                </a>
+            </div>
+            
+                        <div class="col-lg-6 order-lg-2 order-1" data-aos="fade-left">
+                <div class="about-right-image-wrapper">
+                    <img src="images/hero2.jpg" alt="Students working on academic research" class="img-fluid about-right-image-style">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="research" class="research-section">
+<div class="container">
+
+    <div class="row mb-5">
+        <div class="col-lg-12 text-center" data-aos="fade-down">
+            <div class="contest-eyebrow">Advanced Academics</div>
+            <h2 class="research-title">The <span>LEX</span> Research Program</h2>
+            <div class="research-divider" style="margin: 1rem auto 1.5rem;"></div>
+            <p class="research-subtitle mx-auto">
+                Elevate your academic journey with a hands-on research experience guided by leading scholars from the world's most prestigious universities.
+            </p>
+        </div>
+    </div>
+
+        <div class="research-timeline">
+        <div class="row g-4">
+
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="timeline-step">
+                    <div class="timeline-header">
+                        <div class="timeline-dot"><i class="bi bi-person-workspace"></i></div>
+                        <div class="timeline-step-label">Step 1</div>
+                    </div>
+                    <h3 class="timeline-title">Global Faculty Mentorship</h3>
+                    <p class="timeline-text">
+                        Work directly with invited professors from top global institutions, including Ivy League schools and other top-tier research universities, to develop your own unique project.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="timeline-step">
+                    <div class="timeline-header">
+                        <div class="timeline-dot"><i class="bi bi-journal-bookmark"></i></div>
+                        <div class="timeline-step-label">Step 2</div>
+                    </div>
+                    <h3 class="timeline-title">Original Research Projects</h3>
+                    <p class="timeline-text">
+                        Engage in advanced research in fields like Computer Science, Math, and Engineering, culminating in a publication-ready paper that showcases deep intellectual curiosity.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="timeline-step">
+                    <div class="timeline-header">
+                        <div class="timeline-dot"><i class="bi bi-mortarboard"></i></div>
+                        <div class="timeline-step-label">Step 3</div>
+                    </div>
+                    <h3 class="timeline-title">College Application Edge</h3>
+                    <p class="timeline-text">
+                        A finalized research paper provides a significant and distinctive advantage for applications to highly selective universities, demonstrating academic maturity and capability.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row mt-5 pt-4 align-items-center">
+        <div class="col-lg-12" data-aos="fade-right">
+            <h3 class="research-title" style="font-size:1.8rem; margin-bottom:.8rem;">
+                Interdisciplinary Research Streams
+            </h3>
+            <p class="research-subtitle" style="margin-bottom:3rem;">
+                Our programs connect core analytical sciences (STEM) with emerging fields, allowing students to tackle complex problems at the intersection of technology, finance, and society.
+            </p>
+
+            <div class="row g-4">
+                <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
+                    <a href="javascript:void(0)" class="field-image-card" aria-label="Computational Finance & AI">
+                        <img src="assets/img/fields/fin.jpg" alt="Computational Finance Field">
+                        <div class="field-card-overlay"></div>
+                        <h4 class="field-card-title">Computational Finance & AI</h4>
+                        <p class="field-card-description">
+                            Applying advanced algorithms and machine learning to predict market trends and model complex economic systems.
+                        </p>
+                    </a>
+                </div>
+
+                <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="200">
+                    <a href="javascript:void(0)" class="field-image-card" aria-label="Data Science in Psychology">
+                        <img src="assets/img/fields/psy.jpg" alt="Computational Psychology Field">
+                        <div class="field-card-overlay"></div>
+                        <h4 class="field-card-title">Data Science in Psychology</h4>
+                        <p class="field-card-description">
+                            Using big data, network analysis, and computing to study human behavior, cognition, and public opinion.
+                        </p>
+                    </a>
+                </div>
+
+                <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="300">
+                    <a href="javascript:void(0)" class="field-image-card" aria-label="Robotics & Mechatronics">
+                        <img src="assets/img/fields/robotics.jpg" alt="Robotics & Mechatronics Field">
+                        <div class="field-card-overlay"></div>
+                        <h4 class="field-card-title">Robotics & Mechatronics</h4>
+                        <p class="field-card-description">
+                            The fusion of engineering and computer science to design, build, and program intelligent automated systems.
+                        </p>
+                    </a>
+                </div>
+
+                <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="400">
+                    <a href="javascript:void(0)" class="field-image-card" aria-label="Computational Biology">
+                        <img src="assets/img/fields/bio.jpg" alt="Computational Biology Field">
+                        <div class="field-card-overlay"></div>
+                        <h4 class="field-card-title">Computational Biology</h4>
+                        <p class="field-card-description">
+                            Applying math and computing tools to model biological systems, analyze DNA/RNA sequencing, and accelerate drug discovery.
+                        </p>
+                    </a>
+                </div>
+
+                <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="500">
+                    <a href="javascript:void(0)" class="field-image-card" aria-label="Computer Science & Core AI">
+                        <img src="assets/img/fields/ai.jpg" alt="AI and Ethics Field">
+                        <div class="field-card-overlay"></div>
+                        <h4 class="field-card-title">Computer Science & Core AI</h4>
+                        <p class="field-card-description">
+                            Focus on advanced algorithms, theoretical computing, machine learning models, and complex data structures.
+                        </p>
+                    </a>
+                </div>
+
+                <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="600">
+                    <a href="javascript:void(0)" class="field-image-card" aria-label="Explore Your Own Field">
+                        <img src="assets/img/fields/more.jpg" alt="Abstract Innovation Field">
+                        <div class="field-card-overlay"></div>
+                        <h4 class="field-card-title">Explore Your Own Field</h4>
+                        <p class="field-card-description">
+                            We support interdisciplinary research. Share your unique project idea or specialized field of study with our global faculty network.
+                        </p>
+                    </a>
+                </div>
+            </div>
+
+            <p class="research-subtitle mt-5" style="margin-bottom:0rem;">
+                Our research network includes faculty from <strong>Harvard, MIT, Stanford, KAIST</strong>, and other leading global institutions.
+            </p>
+        </div>
+    </div>
+
+</div>
+</section>
+
 <section id="contests" class="contest-section">
-  <div class="container">
-
-    <!-- Header -->
+<div class="container">
     <div class="row align-items-end mb-4 mb-lg-3">
-      <div class="col-lg-8" data-aos="fade-right">
-        <div class="contest-eyebrow">Competitions</div>
-        <h2 class="contest-title">
-          Olympiad & Competition Programs
-        </h2>
-        <div class="contest-divider"></div>
-      </div>
+        <div class="col-lg-8" data-aos="fade-right">
+            <div class="contest-eyebrow">Competitions</div>
+            <h2 class="contest-title">Advanced Academic Competition Portfolio</h2>
+            <div class="contest-divider"></div>
+        </div>
     </div>
 
-    <!-- 01: International Logic Olympiad -->
-    <section id="contest-ilo" class="contest-subsection" aria-labelledby="contest-ilo-title" data-aos="fade-up">
-      <div class="contest-subsection-inner">
-        <div class="row gx-5 gy-4 align-items-center">
-          <div class="col-md-6 order-md-1 order-2">
-
-            <div class="contest-subtitle-bar">
-              <div class="contest-subtitle-pill">Logic Olympiad</div>
-            </div>
-
-            <h3 id="contest-ilo-title" class="contest-name">International Logic Olympiad (ILO)</h3>
-            <p class="contest-tagline">
-              Global problem-solving in pure logic and reasoning.
-            </p>
-
-<p class="contest-desc">
-  The International Logic Olympiad gathers students worldwide to solve 
-  challenging <strong>logic puzzles</strong> and reasoning problems. Hosted in 
-  partnership with <strong>Stanford University</strong>, the contest expands 
-  access to advanced logic education, with LEX serving as the regional host for 
-  the <strong>South Korea</strong> division. 
-</p>
-
-
-            <ul class="contest-points mb-4">
-              <li>Progressive rounds with puzzle-based and proof-style challenges.</li>
-              <li>Participation from <strong>4000+ students</strong> across 90+ countries.</li>
-              <li>Direct pathways into a Stanford-affiliated global logic community.</li>
-            </ul>
-            <div class="ilo-mini-row">
-  <div class="ilo-year">Update</div>
-<div class="ilo-text">
-  The ILO in South Korea has transitioned to an 
-  <strong>offline, in-person testing format</strong> starting in 2026, 
-  administered and managed by LEX.
-</div>
-</div>
-
-
-
-                    <a href="https://www.logicolympiad.org/" class="btn-lex-main">Official Website for ILO</a>
-
-          </div>
-          <div class="col-md-6 order-md-2 order-1">
-            <div class="contest-img-wrapper">
-              <img src="images/logos/ilo2024.webp" alt="Students solving logic puzzles in the International Logic Olympiad" class="contest-img">
-              <div class="contest-img-overlay"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 02: Technovation South Korea -->
-    <section id="contest-technovation" class="contest-subsection" aria-labelledby="contest-technovation-title" data-aos="fade-up" data-aos-delay="70">
-      <div class="contest-subsection-inner">
-        <div class="row gx-5 gy-4 align-items-center flex-md-row-reverse">
-          <div class="col-md-6 order-md-1 order-2">
-
-            <div class="contest-subtitle-bar">
-              <div class="contest-subtitle-pill">Girls in STEM</div>
-            </div>
-
-            <h3 id="contest-technovation-title" class="contest-name">Technovation South Korea</h3>
-            <p class="contest-tagline">
-              App development and entrepreneurship for girls solving real-world problems.
-            </p>
-
-            <p class="contest-desc">
-The <strong>Technovation Challenge</strong> is a global competition that invites girls to identify a real-world problem and develop an application and a business plan to solve it, building skills in technology, entrepreneurship, and leadership.
-            </p>
-
-        <p class="contest-desc">
-            Top projects advance from regional judging to the <strong>global final round</strong>, where finalists present their solutions to an international panel.
- </p>
-            <ul class="contest-points mb-4">
-              <li>Team-based app projects focused on social impact.</li>
-              <li>Guidance in ideation, UI/UX, and pitch preparation.</li>
-              <li>Entry point into the worldwide Technovation Challenge community.</li>
-            </ul>
-                  <a href="https://technovationkorea.org/" class="btn-lex-main">Official Website for Technovation Korea</a>
-          </div>
-          <div class="col-md-6 order-md-2 order-1">
-            <div class="contest-img-wrapper">
-              <img src="images/logos/technovation.png" alt="Technovation participants pitching their app projects" class="contest-img">
-              <div class="contest-img-overlay"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 03: ACSL -->
-    <section id="contest-acsl" class="contest-subsection" aria-labelledby="contest-acsl-title" data-aos="fade-up" data-aos-delay="120">
-      <div class="contest-subsection-inner">
-        <div class="row gx-5 gy-4 align-items-center">
-          <div class="col-md-6 order-md-1 order-2">
-
-            <div class="contest-subtitle-bar">
-              <div class="contest-subtitle-pill">Computer Science</div>
-            </div>
-
-            <h3 id="contest-acsl-title" class="contest-name">American Computer Science League (ACSL)</h3>
-            <p class="contest-tagline">
-              Foundational theory and algorithms for aspiring computer scientists.
-            </p>
-
-            <p class="contest-desc">
-              The <strong>American Computer Science League (ACSL)</strong> builds 
-              <strong>computational thinking</strong> through written and online contests. 
-              Now in its 46th year, ACSL engages around 
-              <strong>8,000 students worldwide</strong> in core CS concepts and problem-solving.
-            </p>
-
-            <ul class="contest-points mb-4">
-              <li>Offers multiple divisions—Elementary, Junior, Intermediate, and Senior.</li>
-              <li>Four seasonal contests followed by the ACSL Finals.</li>
-              <li>Supports a structured, multi-year CS competition pathway.</li>
-            </ul>
-
-<div class="ilo-mini-row">
-<div class="ilo-year">Update</div>
-<div class="ilo-text">
-From the 2025–2026 contest season, the ACSL in South Korea will be held at 
-<strong>two official test locations</strong> — Jeju and Seoul — 
-administered and managed by LEX.
-
-</div>
-</div>
-
-                  <a href="https://www.aceconsult.me/kcsl" class="btn-lex-main">Official Website for KCSL</a>
-          </div>
-          <div class="col-md-6 order-md-2 order-1">
-            <div class="contest-img-wrapper">
-              <img src="images/logos/acsl2.png" alt="Students participating in the American Computer Science League" class="contest-img">
-              <div class="contest-img-overlay"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 04: VEX Robotics -->
     <section id="contest-vex" class="contest-subsection" aria-labelledby="contest-vex-title" data-aos="fade-up" data-aos-delay="170">
-      <div class="contest-subsection-inner">
-        <div class="row gx-5 gy-4 align-items-center flex-md-row-reverse">
-          <div class="col-md-6 order-md-1 order-2">
+        <div class="contest-subsection-inner">
+            <div class="row gx-5 gy-4 align-items-center flex-md-row-reverse">
+                <div class="col-md-6 order-md-2 order-1">
+                    <div class="contest-subtitle-bar">
+                        <div class="contest-subtitle-pill">Robotics</div>
+                    </div>
 
-            <div class="contest-subtitle-bar">
-              <div class="contest-subtitle-pill">Robotics</div>
+                    <h3 id="contest-vex-title" class="contest-name">VEX Korea Open</h3>
+                    <p class="contest-tagline">
+                        A global hands-on robotics challenge where students design, build, and compete.
+                    </p>
+
+                    <p class="contest-desc">
+                        <strong>VEX</strong> is one of the world’s largest student robotics competitions, with over 1 million students across 70+ countries, and participation in South Korea continues to grow rapidly each year.
+                    </p>
+                    <p class="contest-desc">
+                        By launching the <strong>VEX Korea Open</strong> in partnership with <strong>CREATE</strong>, we are providing students with an additional high-level competition opportunity beyond the national rounds hosted by REC, opening a new pathway for teams to compete, collaborate, and challenge themselves on an international stage.
+                    </p>
+
+                    <ul class="contest-points mb-4">
+                        <li>One of the world’s largest student robotics competitions.</li>
+                        <li>VEX Korea Open currently features IQ and V5.</li>
+                        <li>Standardized rules ensure equal competition with international teams.</li>
+                    </ul>
+
+                    <div class="ilo-mini-row">
+                        <div class="ilo-year" style="color:#d9463e !important;border-right: 2px solid #d9463e;">NEW</div>
+                        <div class="ilo-text">
+                            The <strong>VEX Korea Open</strong> will launch for the first time in South Korea in collaboration with the <strong>CREATE organization</strong>, welcoming both local and international teams. The event is confirmed for January for the VEX IQ division, with details for the VEX V5 division to be announced soon.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 order-md-1 order-2">
+                    <div class="contest-img-wrapper">
+                        <img src="images/logos/vex.png" alt="Students competing in a VEX robotics match" class="contest-img">
+                        <div class="contest-img-overlay"></div>
+                    </div>
+                </div>
             </div>
-
-            <h3 id="contest-vex-title" class="contest-name">VEX Korea Open</h3>
-            <p class="contest-tagline">
-              A global hands-on robotics challenge where students design, build, and compete.
-            </p>
-
-            <p class="contest-desc">
-<strong>VEX</strong> is one of the world’s largest student robotics competitions, with over 1 million students across 70+ countries, and participation in South Korea continues to grow rapidly each year.
-            </p>
-                        <p class="contest-desc">
- By launching the <strong>VEX Korea Open</strong> in partnership with <strong>CREATE</strong>, we are providing students with an additional high-level competition opportunity beyond the national rounds hosted by REC, opening a new pathway for teams to compete, collaborate, and challenge themselves on an international stage.
-            </p>
-
-
-
-
-
-            <ul class="contest-points mb-4">
-              <li>One of the world’s largest student robotics competitions.</li>
-              <li>VEX Korea Open currently features IQ and V5.</li>
-              <li>Standardized rules ensure equal competition with international teams.</li>
-            </ul>
-            <div class="ilo-mini-row" >
-            <div class="ilo-year" style="color:#d9463e !important;border-right: 2px solid #d9463e;">NEW</div>
-<div class="ilo-text">
-The <strong>VEX Korea Open</strong> will launch for the first time in South Korea in collaboration with the <strong>CREATE organization</strong>, welcoming both local and international teams. The event is confirmed for January for the VEX IQ division, with details for the VEX V5 division to be announced soon.
-</div>
-
-</div>
-          
-          </div>
-          <div class="col-md-6 order-md-2 order-1">
-            <div class="contest-img-wrapper">
-              <img src="images/logos/vex.png" alt="Students competing in a VEX robotics match" class="contest-img">
-              <div class="contest-img-overlay"></div>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
-
-  </div>
+</div>
 </section>
 
-<!-- ==========================
-     CONTACT SECTION
-     ==========================-->
+<section class="cta-section">
+<div class="container">
+    <div class="cta-inner-card" data-aos="zoom-in">
+        <div class="cta-title">Ready to Launch Your Research Career?</div>
+        <p class="cta-subtitle">
+            Secure your spot in the LEX Research Program and begin your journey toward publication under the guidance of top global university professors.
+        </p>
+
+        <a href="mailto:research@lexorganization.com" class="btn-cta-light">
+            Start Your Application <i class="bi bi-arrow-right-short"></i>
+        </a>
+    </div>
+</div>
+</section>
+
 <section id="contact" class="contact-section py-5" style="background:#ffffff;">
-  <div class="container text-center" data-aos="fade-up">
+<div class="container text-center" data-aos="fade-up">
 
     <h2 class="contact-title" style="
-      font-family:'Poppins', sans-serif;
-      font-size:2.1rem;
-      font-weight:600;
-      color:#1e1e1e;
-      letter-spacing:-0.03em;
-    ">Contact <span style="color:var(--accent-red);">LEX</strong></h2>
+        font-family:'Poppins', sans-serif;
+        font-size:2.1rem;
+        font-weight:600;
+        color:#1e1e1e;
+        letter-spacing:-0.03em;
+    ">Contact <span style="color:var(--accent-red);">LEX</span></h2>
 
     <div style="
-      width:70px;
-      height:3px;
-      background:var(--accent-red);
-      border-radius:4px;
-      margin:1rem auto 2rem;
+        width:70px;
+        height:3px;
+        background:var(--accent-red);
+        border-radius:4px;
+        margin:1rem auto 2rem;
     "></div>
 
     <p style="
-      max-width:500px;
-      margin:0 auto 1.2rem;
-      font-size:1rem;
-      color:#4b5563;
-      line-height:1.6;
+        max-width:500px;
+        margin:0 auto 1.2rem;
+        font-size:1rem;
+        color:#4b5563;
+        line-height:1.6;
     ">
-      For partnership inquiries, school hosting, or competition programs,  
-      please contact us via email.
+        For partnership inquiries, school hosting, or competition programs,
+        please contact us via email.
     </p>
 
-    <a href="mailto:info@lexconsulting.org"
-       style="
+    <a href="mailto:main@lexorganization.com"
+        style="
         display:inline-block;
         margin-top:.5rem;
         padding:.85rem 2.2rem;
@@ -885,73 +1173,56 @@ The <strong>VEX Korea Open</strong> will launch for the first time in South Kore
         text-decoration:none;
         box-shadow:0 8px 18px rgba(217,70,62,0.25);
         transition:.25s ease;
-       ">
-      info@lexconsulting.org
+        ">
+        main@lexorganization.com
     </a>
 
-  </div>
-</section>
-
-<!-- ==========================
-     FOOTER
-     ==========================-->
-<footer class="py-4" style="background:#fafafa; border-top:1px solid #e5e7eb;">
-  <div class="container text-center">
-    <div style="font-size:.9rem; color:#6b7280; margin-top:.4rem;">
-      © 2025 LEX · All rights reserved.
-    </div>
-  </div>
+</div>
 </footer>
 
-
-<!-- AOS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-  AOS.init({ once:true, duration:800 });
+    AOS.init({ once:true, duration:800 });
 
-  // Navbar scroll effect
-  window.addEventListener("scroll", () => {
-    const nav = document.querySelector(".navbar-custom");
-    if(window.scrollY > 30){
-      nav.classList.add("scrolled");
-    } else {
-      nav.classList.remove("scrolled");
-    }
-  });
-
-  /* Number Animation */
-  document.addEventListener("DOMContentLoaded", function () {
-    const counters = document.querySelectorAll(".hero-data-number");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animate(entry.target);
-          observer.unobserve(entry.target);
+    window.addEventListener("scroll", () => {
+        const nav = document.querySelector(".navbar-custom");
+        if(window.scrollY > 30){
+            nav.classList.add("scrolled");
+        } else {
+            nav.classList.remove("scrolled");
         }
-      });
-    }, { threshold: 0.4 });
+    });
 
-    counters.forEach(c => observer.observe(c));
+    document.addEventListener("DOMContentLoaded", function () {
+        const counters = document.querySelectorAll(".hero-data-number");
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animate(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
 
-    function animate(el){
-      const target = +el.dataset.target;
-      const suffix = el.dataset.suffix || "";
-      const duration = 1200;
-      let start = null;
+        counters.forEach(c => observer.observe(c));
 
-      function frame(t){
-        if(!start) start = t;
-        const progress = Math.min((t - start) / duration, 1);
-        el.textContent = Math.floor(progress * target) + suffix;
-        if(progress < 1) requestAnimationFrame(frame);
-      }
-      requestAnimationFrame(frame);
-    }
-  });
+        function animate(el){
+            const target = +el.dataset.target;
+            const suffix = el.dataset.suffix || "";
+            const duration = 1200;
+            let start = null;
+
+            function frame(t){
+                if(!start) start = t;
+                const progress = Math.min((t - start) / duration, 1);
+                el.textContent = Math.floor(progress * target) + suffix;
+                if(progress < 1) requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
+        }
+    });
 </script>
 
 </body>
